@@ -1,0 +1,126 @@
+﻿<Page x:Class="Hospital.XAML.Pages.RecordsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.XAML.Pages" xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      mc:Ignorable="d" 
+      FontFamily="{DynamicResource MainFont}"
+      d:DesignHeight="1018" d:DesignWidth="1700"
+      >
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/ComboBoxStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/TableStyles.xaml"/>
+                <ResourceDictionary Source="../../Language/Strings.en.xaml"/>
+                <ResourceDictionary Source="../../Language/Strings.sr.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            <BooleanToVisibilityConverter x:Key="StringIsNullOrEmptyToVisibilityConverter" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Grid.Column="1" Margin="30 20 20 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Page Title-->
+        <TextBlock Text="{DynamicResource Record}" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="{StaticResource TextColor}" HorizontalAlignment="Left"/>
+
+        <!--Add Button-->
+        <Button Name="AddButton" Style="{StaticResource addButton}" Click="AddButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Margin="0 1 8 0" Width="11" Height="11" Foreground="{StaticResource TextColor}"/>
+                <TextBlock Text="{DynamicResource AddNewRecord}"/>
+            </StackPanel>
+        </Button>
+
+        <!--Seprator-->
+        <Separator Height="1" Grid.Row="3" Background="{StaticResource TextColor}" Margin="0 -1 0 10"/>
+
+        <TextBlock Text="{DynamicResource Filter}" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Margin="0 0 215 0" Foreground="{StaticResource TextColor}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+        <!--Filter Textbox-->
+        <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
+            <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="{StaticResource TextColor}" IsHitTestVisible="False"
+                           Panel.ZIndex="1" Text="{DynamicResource Search}"
+                           Visibility="{Binding ElementName=textBoxFilter, Path=Text, Converter={StaticResource StringIsNullOrEmptyToVisibilityConverter}}" />
+            <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" TextChanged="textBoxFilter_TextChanged"/>
+        </Grid>
+
+        <!--Data Grid-->
+        <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="DataGrid" Style="{DynamicResource DataGridStyle1}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="{DynamicResource NameAndSurname}" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Patient.Name" UpdateSourceTrigger="PropertyChanged"/>
+                                        <Binding Path="Patient.Surname" UpdateSourceTrigger="PropertyChanged"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Patient.Contact, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Width="*">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource PhoneNumber}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged, ConverterCulture=sr-Latn-RS}" IsReadOnly="True" Width="*">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource AppointmentDate}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Diagnosis, UpdateSourceTrigger=PropertyChanged, ConverterCulture=sr-Latn-RS}" IsReadOnly="True" Width="*">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource Diagnosis}" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Prescription, UpdateSourceTrigger=PropertyChanged, ConverterCulture=sr-Latn-RS}" IsReadOnly="True" Width="3*">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="{DynamicResource Prescription}" />
+                    </DataGridTextColumn.Header>
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                            <Setter Property="ToolTip" Value="{Binding Prescription}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="{DynamicResource Operations}" IsReadOnly="True" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource gridEditButton}" Click="EditButton_Click">
+                                    <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                </Button>
+                                <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Click="DeleteButton_Click">
+                                    <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

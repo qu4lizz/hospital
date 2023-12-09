@@ -1,0 +1,65 @@
+﻿<Window x:Class="Hospital.XAML.DoctorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.XAML"
+        mc:Ignorable="d"
+        Title="{DynamicResource Hospital}"
+        MinHeight="600" MinWidth="1000"
+        WindowState="Maximized"
+        Background="{DynamicResource BackgroundColor}"
+        Foreground="{DynamicResource TextColor}"
+        FontFamily="{DynamicResource MainFont}"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Assets/hospital.ico">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/BorderStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="../Language/Strings.en.xaml"/>
+                <ResourceDictionary Source="../Language/Strings.sr.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border BorderThickness="4" BorderBrush="{DynamicResource SelectedColor}" />
+
+        <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,0,80">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock x:Name="admissionsTextBlock" Grid.Row="0" Text="{DynamicResource AdmissionsSidebar}" MouseLeftButtonDown="MouseClickAdmissions" Style="{StaticResource SidebarTextBlock}"/>
+            <TextBlock x:Name="appointmentsTextBlock" Grid.Row="1" Text="{DynamicResource AppointmentsSidebar}" MouseLeftButtonDown="MouseClickAppointments" Style="{StaticResource SidebarTextBlock}"/>
+            <TextBlock x:Name="recordsTextBlock" Grid.Row="2" Text="{DynamicResource RecordsSidebar}" MouseLeftButtonDown="MouseClickRecords" Style="{StaticResource SidebarTextBlock}"/>
+            <TextBlock x:Name="surgeriesTextBlock" Grid.Row="3" Text="{DynamicResource SurgeriesSidebar}" MouseLeftButtonDown="MouseClickSurgeries" Style="{StaticResource SidebarTextBlock}"/>
+            <TextBlock x:Name="settingsTextBlock" Grid.Row="4" Text="{DynamicResource SettingsSidebar}" MouseLeftButtonDown="MouseClickSettings" Style="{StaticResource SidebarTextBlock}"/>
+        </Grid>
+
+        <Button x:Name="LogoutBtn"
+                Content="{DynamicResource Logout}"
+                Click="LogoutBtn_Click"
+                ClickMode="Press"
+                VerticalAlignment="Bottom"
+                Margin="0,20"
+                Style="{StaticResource LogoutButtonStyle}"/>
+        
+        <Frame Grid.Column="1" x:Name="MainPage" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

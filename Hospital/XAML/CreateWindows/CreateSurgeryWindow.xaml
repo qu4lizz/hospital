@@ -1,0 +1,80 @@
+﻿<Window x:Class="Hospital.XAML.CreateWindows.CreateSurgeryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.XAML.CreateWindows" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        WindowState="Maximized"
+        MinHeight="600" MinWidth="800"
+        Background="{DynamicResource BackgroundColor}"
+        Foreground="{DynamicResource TextColor}"
+        FontFamily="{DynamicResource MainFont}"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/ComboBoxStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="../../Language/Strings.en.xaml"/>
+                <ResourceDictionary Source="../../Language/Strings.sr.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                                Margin="20">
+            <TextBlock x:Name="Header" Text="{DynamicResource AddNewRecord}"
+                                   Style="{StaticResource HeaderTextBlock}"/>
+
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{DynamicResource Patient}"
+                                Grid.Row="0"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                <ComboBox x:Name="cb_Patient" Grid.Row="1" Style="{StaticResource SmallerComboBox}"/>
+                <TextBlock Text="{DynamicResource Doctor}"
+                                Grid.Row="2"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                <ComboBox x:Name="cb_Doctor" Grid.Row="3" Style="{StaticResource SmallerComboBox}"/>
+                <TextBlock Text="{DynamicResource SurgeryDate}"
+                                Grid.Row="4"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                <xctk:DateTimePicker Name="DatePickerField" Grid.Row="5" Style="{StaticResource DateTimePickerStyle}" />
+
+                <TextBlock Text="{DynamicResource Notes}"
+                                Grid.Row="6"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                <TextBox x:Name="notes" Grid.Row="7" Style="{StaticResource TextArea}"/>
+
+            </Grid>
+
+            <Button
+                Name="CreateButton"
+                Content="{DynamicResource Create}"
+                Click="CreateButton_Click"
+                ClickMode="Press"
+                Cursor="Hand"
+                Style="{StaticResource LargeButtonStyle}" Margin="0,75,0,15"/>
+        </StackPanel>
+    </Grid>
+</Window>

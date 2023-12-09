@@ -1,0 +1,132 @@
+﻿<Page x:Class="Hospital.XAML.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Hospital.XAML.Pages"
+      mc:Ignorable="d"
+      FontFamily="{DynamicResource MainFont}"
+      d:DesignHeight="1018" d:DesignWidth="1700"
+      Title="SettingsPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/ComboBoxStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="../../Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="../../Language/Strings.en.xaml"/>
+                <ResourceDictionary Source="../../Language/Strings.sr.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Margin="20" Text="{DynamicResource Languages}" Style="{StaticResource CenteredTitleTextBlock}"/>
+                <ComboBox x:Name="cb_lang" Style="{StaticResource DefaultComboBox}" SelectionChanged="LanguageComboBox_SelectionChanged">
+                    <ComboBoxItem x:Name="cbi_lang_sr" Content="{DynamicResource Serbian}" Style="{StaticResource DefaultComboBoxItem}"/>
+                    <ComboBoxItem x:Name="cbi_lang_en" Content="{DynamicResource English}" Style="{StaticResource DefaultComboBoxItem}"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Margin="20"  Text="{DynamicResource Themes}" Style="{StaticResource CenteredTitleTextBlock}"/>
+                <ComboBox x:Name="cb_theme" Style="{StaticResource DefaultComboBox}" SelectionChanged="ThemeComboBox_SelectionChanged">
+                    <ComboBoxItem x:Name="cbi_theme_light" Content="{DynamicResource LightTheme}" Style="{StaticResource DefaultComboBoxItem}"/>
+                    <ComboBoxItem x:Name="cbi_theme_dark" Content="{DynamicResource DarkTheme}" Style="{StaticResource DefaultComboBoxItem}"/>
+                    <ComboBoxItem x:Name="cbi_theme_green" Content="{DynamicResource GreenTheme}" Style="{StaticResource DefaultComboBoxItem}"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,0,0,80">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource Username}"
+                                Style="{StaticResource LargeDefaultTextBlock}"
+                           />
+                <TextBox Grid.Column="1"
+                              Name="UsernameText"
+                              Text="{Binding Username}"
+                              Style="{StaticResource LargeInputTextBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource PhoneNumber}"
+                                Style="{StaticResource LargeDefaultTextBlock}"
+                           />
+                <TextBox Grid.Column="1"
+                              Name="PhoneNumberText"
+                              Text="{Binding PhoneNumber}"
+                              Style="{StaticResource LargeInputTextBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource Name}"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                <TextBox Grid.Column="1"
+                              Text="{Binding FirstName}"      
+                              Name="FirstNameText"
+                              Style="{StaticResource LargeInputTextBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource Surname}"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                <TextBox Grid.Column="1"
+                              Name="LastNameText"
+                              Text="{Binding Surname}"
+                              Style="{StaticResource LargeInputTextBox}"/>
+            </StackPanel>
+
+            <Button Grid.Row="4" Grid.Column="0"
+                        Content="{DynamicResource Save}"
+                        Click="SaveBtn_Click"
+                        ClickMode="Press"
+                        Cursor="Hand"
+                        Style="{StaticResource LargeButtonStyle}" Margin="0,35,0,25"/>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource OldPassword}"
+                               Style="{StaticResource LargeDefaultTextBlock}"/>
+                <PasswordBox
+                                  Name="OldPasswordText"
+                                  Style="{StaticResource LargePasswordBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{DynamicResource NewPassword}"
+                               Style="{StaticResource LargeDefaultTextBlock}"/>
+                <PasswordBox
+                                  Name="NewPasswordText"
+                                  Style="{StaticResource LargePasswordBox}"/>
+            </StackPanel>
+            <Button Grid.Row="4" Grid.Column="1"
+                        Content="{DynamicResource ChangePassword}"
+                        Click="ChangePasswordBtn_Click"
+                        ClickMode="Press"
+                        Cursor="Hand"
+                        Style="{StaticResource LargeButtonStyle}" Margin="0,35,0,25"/>
+            
+        </Grid>
+    </Grid>
+</Page>

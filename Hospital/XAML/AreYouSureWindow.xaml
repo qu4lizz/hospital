@@ -1,0 +1,62 @@
+﻿<Window x:Class="Hospital.XAML.AreYouSureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.XAML"
+        mc:Ignorable="d"
+        Title="MsgBoxYesNo" Height="300" Width="400"
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" Background="Transparent">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="../Language/Strings.en.xaml"/>
+                <ResourceDictionary Source="../Language/Strings.sr.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Border BorderThickness="5" BorderBrush="{StaticResource BorderColor}" 
+    CornerRadius="20" Background="{StaticResource BackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox>
+                <TextBlock x:Name="txtMessage" Width="420" Padding="15"
+                FontSize="40" TextWrapping="Wrap" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                TextAlignment="Center" Text="{DynamicResource AreYouSure}"
+                Style="{StaticResource LargeDefaultTextBlock}"/>
+            </Viewbox>
+
+            <Viewbox Grid.Row="1">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="{DynamicResource Yes}" x:Name="Yes" 
+                    Margin="10" HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" Width="120" 
+                    Click="Yes_Click"
+                    Style="{StaticResource LargeButtonStyle}"
+                            />
+                    <Button Content="{DynamicResource No}" x:Name="No" 
+                    Margin="10" HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" Width="120" 
+                    Click="No_Click" IsCancel="True"
+                    Style="{StaticResource LargeButtonStyle}"
+                            />
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+    </Border>
+</Window>

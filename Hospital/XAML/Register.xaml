@@ -1,0 +1,108 @@
+﻿<Window x:Class="Hospital.XAML.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hospital.XAML"
+        mc:Ignorable="d"
+        Title="{DynamicResource Hospital}"
+        WindowState="Maximized"
+        MinHeight="600" MinWidth="800"
+        Background="{DynamicResource BackgroundColor}"
+        Foreground="{DynamicResource TextColor}"
+        FontFamily="{DynamicResource MainFont}"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Assets/hospital.ico">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/BorderStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBoxStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="../Language/Strings.en.xaml"/>
+                <ResourceDictionary Source="../Language/Strings.sr.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                                Margin="20">
+                    <TextBlock Text="{DynamicResource RegisterTitle}"
+                                   Style="{StaticResource HeaderTextBlock}"/>
+                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{DynamicResource Username}"
+                                Grid.Row="0"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                        <TextBox Grid.Column="1"
+                              Name="UsernameText"
+                              Grid.Row="1"
+                              Style="{StaticResource LargeInputTextBox}"/>
+
+                        <TextBlock Text="{DynamicResource Password}"
+                               Grid.Row="2"
+                               Style="{StaticResource LargeDefaultTextBlock}"/>
+                        <PasswordBox Grid.Row="3"
+                                  Name="PasswordText"
+                                  Style="{StaticResource LargePasswordBox}"/>
+
+                        <TextBlock Text="{DynamicResource Name}"
+                                Grid.Row="4"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                        <TextBox Grid.Column="1"
+                                  Name="FirstNameText"
+                              Grid.Row="5"
+                              Style="{StaticResource LargeInputTextBox}"/>
+                        <TextBlock Text="{DynamicResource Surname}"
+                                Grid.Row="6"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                        <TextBox Grid.Column="1"
+                              Name="LastNameText"
+                              Grid.Row="7"
+                              Style="{StaticResource LargeInputTextBox}"/>
+                        <TextBlock Text="{DynamicResource PhoneNumber}"
+                                Grid.Row="8"
+                                Style="{StaticResource LargeDefaultTextBlock}"/>
+                <TextBox Grid.Column="1"
+                              Name="PhoneNumberText"
+                              Grid.Row="9"
+                              Style="{StaticResource LargeInputTextBox}"/>
+            </Grid>
+            <Grid Grid.Row="10" Height="40" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Margin="20,0" Height="40" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource TextColor}" x:Name="rb_manager" Content="{DynamicResource Manager}" HorizontalAlignment="Left" VerticalContentAlignment="Center" GroupName="type" FontSize="22"/>
+                <RadioButton Height="40" Grid.Row="0" Grid.Column="0" Foreground="{DynamicResource TextColor}" x:Name="rb_doctor" Content="{DynamicResource Doctor}" HorizontalAlignment="Left" VerticalContentAlignment="Center" GroupName="type" IsChecked="True" FontSize="22"/>
+                <RadioButton Height="40" Grid.Row="0" Grid.Column="2" Foreground="{DynamicResource TextColor}" x:Name="rb_nurse" Content="{DynamicResource Nurse}" HorizontalAlignment="Left" VerticalContentAlignment="Center" GroupName="type" FontSize="22"/>
+
+            </Grid>
+            <Button
+                        Content="{DynamicResource Register}"
+                        Click="RegisterBtn_Click"
+                        ClickMode="Press"
+                        Cursor="Hand"
+                        Style="{StaticResource LargeButtonStyle}" Margin="0,35,0,25"/>
+                </StackPanel>
+        </Grid>
+</Window>
